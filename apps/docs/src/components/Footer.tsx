@@ -41,9 +41,8 @@ function PageLink({
 }
 
 function PageNavigation() {
-  let initialPathname = usePathname()
-  // Running on the server, there's bug with usePathname() and basePath https://github.com/vercel/next.js/issues/52700
-  if (typeof window === 'undefined' && initialPathname === '/') initialPathname = '/docs'
+  const pathname = usePathname()
+  const docsPathname = pathname?.replace('/docs', '/')
 
   const allPages = routes.flatMap(group => group.links)
   const currentPageIndex = allPages.findIndex(page => page.href === initialPathname)
